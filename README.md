@@ -2,7 +2,7 @@
 
 "Ready to play" slim3 vagrant template
 
-Using (Slim3-Skeleton)[https://github.com/akrabat/slim3-skeleton]
+Using [https://github.com/akrabat/slim3-skeleton](Slim3-Skeleton)
 
 ## Requirements
 

@@ -10,22 +10,23 @@ nginx_events_params:
 
 nginx_sites:
  yupe:
-     - listen 80
-     - server_name yupe-site
+     - listen 80;
+     - server_name slim-app.local;
+     - index index.php;
+     - error_log /var/log/nginx/slim-app.error.log;
+     - access_log /var/log/nginx/slim-app.access.log;
      - root "/var/www/slim-app/public/"
-     - index index.html index.htm index.php
-     - location ~ /\. { return 444; }
-     - location / { try_files $uri $uri /index.php?$args; }
-     - location ~ /protected/ { return 444; }
-     - location ~ ^/themes/(.*)/views/ { return 444; }
+     - location / { try_files $uri /index.php$is_args$args; }
      - location ~ \.php {
-                fastcgi_pass  unix:/var/run/php/php7.0-fpm.sock;
-                fastcgi_index index.php;
-                include fastcgi_params;
-                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-                fastcgi_param PATH_INFO $fastcgi_script_name;
-        }
+         try_files $uri =404;
+         fastcgi_split_path_info ^(.+\.php)(/.+)$;
+         include fastcgi_params;
+         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+         fastcgi_param SCRIPT_NAME $fastcgi_script_name;
+         fastcgi_index index.php;
+         fastcgi_pass  unix:/var/run/php/php7.0-fpm.sock;
+       }
 
 php_use_managed_ini: true
 php_max_execution_time: "3600"
-php_memory_limit: "512M"
+php_memory_limit: "256M"

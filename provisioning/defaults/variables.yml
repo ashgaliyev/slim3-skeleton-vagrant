@@ -9,12 +9,12 @@ nginx_events_params:
  - multi_accept on
 
 nginx_sites:
- yupe:
-     - listen 80;
-     - server_name slim-app.local;
-     - index index.php;
-     - error_log /var/log/nginx/slim-app.error.log;
-     - access_log /var/log/nginx/slim-app.access.log;
+ slim-app:
+     - listen 80
+     - server_name slim-app.local
+     - index index.php
+     - error_log /var/log/nginx/slim-app.error.log
+     - access_log /var/log/nginx/slim-app.access.log
      - root "/var/www/slim-app/public/"
      - location / { try_files $uri /index.php$is_args$args; }
      - location ~ \.php {

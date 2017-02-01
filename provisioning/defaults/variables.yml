@@ -16,6 +16,7 @@ nginx_sites:
      - error_log /var/log/nginx/slim-app.error.log
      - access_log /var/log/nginx/slim-app.access.log
      - root "/var/www/slim-app/public/"
+     - sendfile off
      - location / { try_files $uri /index.php$is_args$args; }
      - location ~ \.php {
          try_files $uri =404;
